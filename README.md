@@ -40,4 +40,6 @@ npm start to run the application.
 ```
 ----------------------
 Acknowledgments:
-_Although, this project is for my understanding of RAG based genrations, but its also a tribute to D. V. Gundappa, whose timeless wisdom serves as corner stone for many. His work continues to inspire generations. Trying to bring code and art-story telling together._
+_Although, this project is for my understanding of RAG based genrations, but its also a tribute to D. V. Gundappa, whose timeless wisdom serves as corner stone for many. His work continues to inspire generations._
+
+**_Trying to bring code and art-story telling together._**
