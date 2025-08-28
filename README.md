@@ -46,3 +46,8 @@ Although this project is for my understanding of RAG-based augmentation, it's al
 
 **_Trying to bring code and art-storytelling together._**
 
+Humbled AI:
+
+<img width="2494" height="159" alt="image" src="https://github.com/user-attachments/assets/ed0572b2-ed9d-4abd-aefd-a7a69a91bb47" />
+
+
