@@ -1,10 +1,11 @@
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { vectorStore } from "./ingest.ts";
 import * as readline from 'node:readline/promises';
+import { vectorStore } from "./ingest.ts";
+import {SYSTEM_PROMPT} from './constants.ts';
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
-const systemPrompt = ["system", "You are a helpful Philosopher who helps the user with meaning insights of life. But you will make sure that you will stick to the context retrived and answer within that scope."];
+const systemPrompt = ["system", SYSTEM_PROMPT];
 const model = new ChatGoogleGenerativeAI({
     apiKey: process.env.OPENAI_API_KEY,
     model: "gemini-2.0-flash",
@@ -12,21 +13,25 @@ const model = new ChatGoogleGenerativeAI({
     maxRetries: 2,
 });
 
-const userMsg=[];
-userMsg.push(systemPrompt);
-
 while (true) {
-    const question = await rl.question('You: ');
-    if (question === '/exit') {
+    const prompt = [systemPrompt];
+
+    const userPrompt = await rl.question('You: ');
+    if (userPrompt === '/exit') {
         break;
     }
-    userMsg.push(question);
+    prompt.push(["user", userPrompt]);
 
-    const aiMsg = await model.invoke(userMsg);
+    const similaritySearchResults = await vectorStore.similaritySearch(userPrompt, 3);
+    const contexts = similaritySearchResults.map(_ => _.pageContent).join('\n\n');
+    prompt.push(["context", contexts]);
+
+    console.log(prompt);
+
+    //const aiMsg = await model.invoke(prompt);
 
 
-    console.log('Philosopher: ' + aiMsg.content);
-}
-
+    //console.log('Philosopher: ' + aiMsg.content);
+};
 rl.close();
 
