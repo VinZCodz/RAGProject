@@ -8,7 +8,7 @@ Your Personal Philosopher:This project is a Retrieval-Augmented Generation (RAG)
 Tech Stack for my experiments with LLM augmentation using RAG, vector embeddings, and vector DB store involves:
 - Agent Framework: **LangChain** for orchestrating the RAG workflow.
 - Vector Embeddings: A **Google embedding model** to convert text into vector representations.
-- Vector Database: **Pinecone** for high-performance storage and retrieval of embeddings.
+- Vector Database: **Pinecone** for high-performance storage and retrieval of embeddings. Dense with 768 dimensions insights.
 - Generative Model: **Gemini on LangChain** for generating coherent responses.
 - Language: **TypeScript** for a robust and type-safe application.
 
@@ -34,20 +34,18 @@ npm install
 ```
 PINECONE_API_KEY=YOUR_PINECONE_API_KEY
 GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+PINECONE_INDEX = YOUR_PINECONE_INDEX;
 ```
-- Running:
-```
-npm run ingest to populate the database.
-npm start to run the application.
-```
+- To populate the database: ```bun run src/ingest.ts```
+- To run chat: ```bun run src/philosopherChat.ts ```
 ----------------------
 Acknowledgments:
 Although this project is for my understanding of RAG-based augmentation, it's also a tribute to D. V. Gundappa, whose timeless wisdom serves as a cornerstone for many. His work continues to inspire generations.
 
-**_Trying to bring code and art-storytelling together._**
-
-Humbled AI:
-
+**_Humbled AI:_**
+<img width="2402" height="688" alt="image" src="https://github.com/user-attachments/assets/0eec9375-4c5d-4d6b-8d47-4f74f425a182" />
 <img width="2494" height="159" alt="image" src="https://github.com/user-attachments/assets/ed0572b2-ed9d-4abd-aefd-a7a69a91bb47" />
+
+**_Trying to bring code and art-storytelling together._**
 
 
