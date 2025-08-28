@@ -4,7 +4,7 @@ import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 
-//process.env.PINECONE_INDEX = "ds-dense-768";
+process.env.PINECONE_INDEX = "ds-dense-768";
 const pinecone = new PineconeClient();
 const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX!);
 
@@ -13,12 +13,12 @@ const embeddings = new GoogleGenerativeAIEmbeddings({
     model: "text-embedding-004", // 768 dimensions
 });
 
-const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+export const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
     pineconeIndex,
     maxConcurrency: 5,
 });
 
-export async function indexDocument(filePath: string) {
+async function ingestDocument(filePath: string) {
     const loader = new PDFLoader(filePath, { splitPages: false });
     const document = await loader.load();
 
@@ -36,8 +36,8 @@ export async function indexDocument(filePath: string) {
         }
     });
 
-    //await vectorStore.addDocuments(documents);
+    //await vectorStore.addDocuments(documents); //Costly op. uncomment when ready to insert to vector DB.
 }
 
-
-
+const filePath = "./kaggaSource/Versatile Characters - In the World of Kagga.pdf"
+ingestDocument(filePath);
